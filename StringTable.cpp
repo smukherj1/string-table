@@ -131,6 +131,7 @@ namespace string_table
 
 	const char* Table::get(detail::ID id) const
 	{
+		tbb::reader_writer_lock::scoped_lock_read scoped_read_lock(m_rw_lock);
 		if (id < m_id_to_str.size())
 		{
 			return m_id_to_str[id];
